@@ -126,6 +126,13 @@ define(function() {
 
   // <link> load method
   var linkLoad = function(url, callback) {
+    // Check if the CSS is already loaded
+        for (var i = 0; i < document.styleSheets.length; i++) {
+            if (document.styleSheets[i].href === url) {
+                // CSS already loaded, invoke callback immediately
+                return callback();
+            }
+        }
     var link = document.createElement('link');
     link.type = 'text/css';
     link.rel = 'stylesheet';
